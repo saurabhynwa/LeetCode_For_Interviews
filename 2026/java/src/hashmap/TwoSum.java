@@ -73,7 +73,7 @@ public class TwoSum {
         System.out.println("Indices = {" + result[0] + ", " + result[1] + "}");
     }
 
-    public static void main(String[] args){
+    static void main(String[] args){
         TwoSum obj = new TwoSum();
 
         int[] nums1 = {2,7,11,15};
@@ -90,5 +90,7 @@ public class TwoSum {
         int target3 = 6;
         int[] result3 = obj.twoSum(nums3, target3);
         obj.printResult(result3);
+
+        
     }
 }
