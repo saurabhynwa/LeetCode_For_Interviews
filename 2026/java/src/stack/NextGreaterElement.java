@@ -1,4 +1,4 @@
-package src.easy;
+package src.stack;
 
 /*
 The next greater element of some element x in an array is the first greater element that is to the right of x in the
@@ -95,7 +95,7 @@ class NextGreaterElement {
             if(i == result.length - 1){
                 System.out.print(result[i]);
             } else {
-            System.out.print(result[i] + ", ");
+                System.out.print(result[i] + ", ");
             }
         }
         System.out.print("]");
@@ -108,3 +108,4 @@ class NextGreaterElement {
         nge.printResultArray(nge.nextGreaterElement(new int[]{2,4}, new int[]{1,2,3,4}));
     }
 }
+
