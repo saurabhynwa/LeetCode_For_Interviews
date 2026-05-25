@@ -1,15 +1,8 @@
 package src.linkedlist;
 
+import static src.linkedlist.ListNode.printLinkedList;
+
 public class ReverseLinkedList {
-
-    private void printLinkedList(ListNode head){
-        while(head != null){
-            System.out.print(head.val + " -> ");
-            head = head.next;
-        }
-        System.out.println();
-    }
-
     private ListNode reverseLinkedList(ListNode head){
         // Logic: initialize a node called previous to null. Assign current to head. While current != null
         // 1. store the reference of current.next
@@ -47,7 +40,7 @@ public class ReverseLinkedList {
         l4.next = l5;
         l5.next = null;
 
-        obj.printLinkedList(l1);
-        obj.printLinkedList(obj.reverseLinkedList(l1));
+        printLinkedList(l1);
+        printLinkedList(obj.reverseLinkedList(l1));
     }
 }
