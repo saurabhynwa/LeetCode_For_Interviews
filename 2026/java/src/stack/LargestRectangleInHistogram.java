@@ -44,7 +44,7 @@ public class LargestRectangleInHistogram {
         }
 
         // Logic: Use Monotonic stack which keeps track of indexes that represent strictly growing bars.
-        // If the stack is empty or the height of current bar <= tallest bar we have seen (stack top), then we push
+        // If the stack is empty or the height of current bar >= tallest bar we have seen (stack top), then we push
         // the current index to stack and move our current index. If we come across a smaller bar, we pause the
         // increment of currentIndex. We get the tallest bar from stack top index and use that as length. Now for width,
         // we need right and left boundaries. RightBoundary = index of the tallest bar we have seen so far for the
