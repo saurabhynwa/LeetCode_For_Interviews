@@ -94,14 +94,22 @@ public class OrderMangoes {
     }
 
     private void insertInMaxHeap(List<String> orders, PriorityQueue<PurchaseMetrics> maxHeap, double sellPrice){
-        for(int row = 1; row < orders.size(); row++){
+        for(int row = 0; row < orders.size(); row++){
             String[] buyOrder = orders.get(row).split(",");
-            int buyQuantity = Integer.parseInt(buyOrder[1].trim());
-            String buyType = buyOrder[2].trim();
-            double buyPrice = Double.parseDouble(buyOrder[3].trim());
+            int buyQuantity;
+            String buyType;
+            double buyPrice;
+
+            try {
+                buyQuantity = Integer.parseInt(buyOrder[1].trim());
+                buyType = buyOrder[2].trim();
+                buyPrice = Double.parseDouble(buyOrder[3].trim());
+            } catch (Exception e){
+                continue;
+            }
 
             // check for validity
-            if(buyType.equalsIgnoreCase("BUY") && (buyPrice >= sellPrice)){
+            if(buyType.equalsIgnoreCase("BUY") && (buyPrice >= sellPrice) && buyQuantity > 0){
                 // insert in max heap
                 maxHeap.add(new PurchaseMetrics(buyPrice, buyQuantity));
             }
