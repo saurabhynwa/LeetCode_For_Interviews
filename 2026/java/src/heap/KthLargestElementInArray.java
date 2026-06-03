@@ -19,6 +19,8 @@ Constraints:
  */
 import java.util.PriorityQueue;
 
+// Note: Quick Select technique can do this in O(N) on avg, but worse case is O(N ^ 2) and it also mutates your input.
+// Hence, minHeap option is preferred.
 
 /*
 Time Complexity: O(N log K). K is the size of heap
