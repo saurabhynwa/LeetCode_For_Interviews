@@ -60,6 +60,8 @@ massive input array N.
 (Note: The resultList allocation requires 𝒪(𝐾) space, but this is often considered part of the expected output return
 signature rather than extra workspace overhead in core interviews).
  */
+
+// There is a more efficient approach using two-pointers. Prefer that.
 public class FindKClosestElements {
     private List<Integer> getKClosestElements(int[] arr, int k, int x){
         // sanity check
