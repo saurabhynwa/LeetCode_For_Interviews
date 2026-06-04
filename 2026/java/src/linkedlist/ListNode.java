@@ -1,8 +1,8 @@
 package src.linkedlist;
 
 public class ListNode {
-    int val;
-    ListNode next;
+    public int val;
+    public ListNode next;
 
     public ListNode() {
     }
@@ -17,9 +17,10 @@ public class ListNode {
     }
 
     public static void printLinkedList(ListNode head){
-        while(head != null){
-            System.out.print(head.val + " -> ");
-            head = head.next;
+        ListNode current = head; // so that we keep the reference to 'head' intact.
+        while(current != null){
+            System.out.print(current.val + " -> ");
+            current = current.next;
         }
         System.out.println();
     }
