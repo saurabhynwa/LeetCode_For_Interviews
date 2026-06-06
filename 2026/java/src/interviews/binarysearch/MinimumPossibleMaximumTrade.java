@@ -54,6 +54,9 @@ within localized stack frames without allocating any heap array footprints.
 import java.util.Arrays;
 
 // The problem statement is hard to interpret/understand due to vague wordings.
+// Think what can be maximum and minimum trade cost from the given trades. Minimum = ZERO, how and when ? You have
+// unlimited discount budget, so all trades are basically free. Hence, low = 0. Maximum = largestTrade in the input. How
+// and when ? you have zero budget, so no discounts. Then the largest number in the input becomes the maximum trade.
 public class MinimumPossibleMaximumTrade {
     private int getMinimumPossibleMaximumTrade(int[] nums, int d){
         // In this question, input array elements are "trade costs". We are given a budget 'd' which we can use to
@@ -66,9 +69,13 @@ public class MinimumPossibleMaximumTrade {
         // it fair or all the trades to use the budget as per a standard rule. Else we would exhaust the entire budget
         // on a one single trade and would land nowhere since other numbers would be larger.
 
-        // Now what is this standard rule here ? If the trade cost is >= our target, then we reduce the target from our
-        // cost. The difference drains the budget. So finally we check whether the budget that we used is <= allocated
-        // budget or not.
+        // Now that we have low and high, we take a 'mid' as target. This target can be a potential minimum maximum
+        // trade cost for all trades if budget is not overused. How ? Imagine the current array number (trade cost) is
+        // greater than our target cost. So if we want our target cost to apply to it, we need to reduce the surplus.
+        // currentNum - target, this is the surplus. And this surplus has to be accounted from the budget. If our
+        // current trade is smaller or equal to our trade cost, then there's no point of using the budget as it doesn't
+        // make sense to give budget when you are going to make a loss. Hence, we don't use the budget cost for trades
+        // that are smaller than our target trade cost.
 
         int largestTrade = Integer.MIN_VALUE; // zero budget, then the largest trade in the input will be the answer
 
