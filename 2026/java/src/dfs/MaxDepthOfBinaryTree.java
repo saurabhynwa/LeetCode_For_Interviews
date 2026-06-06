@@ -60,4 +60,27 @@ public class MaxDepthOfBinaryTree {
         // Post-Order Step: Gather the kids' reports, pick the tallest, and add 1 for yourself
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    public static void main(String[] args){
+        MaxDepthOfBinaryTree maxDepthOfBinaryTree = new MaxDepthOfBinaryTree();
+        TreeNode t1 = new TreeNode(3);
+        TreeNode t2 = new TreeNode(9);
+        TreeNode t3 = new TreeNode(20);
+        TreeNode t4 = new TreeNode(15);
+        TreeNode t5 = new TreeNode(7);
+
+        t1.left = t2;
+        t1.right = t3;
+        t3.left = t4;
+        t3.right = t5;
+
+        System.out.println(maxDepthOfBinaryTree.getMaxDepthOfBinaryTree(t1));
+
+        TreeNode t6 = new TreeNode(1);
+        TreeNode t7 = new TreeNode(2);
+        t6.left = null;
+        t6.right = t7;
+
+        System.out.println(maxDepthOfBinaryTree.getMaxDepthOfBinaryTree(t6));
+    }
 }
