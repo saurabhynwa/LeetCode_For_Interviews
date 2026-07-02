@@ -39,7 +39,7 @@ d = duplicate. We skip the duplicate. This is very important to understand the c
  */
 
 /*
-Time Complexity: O(N  2 ^ N). In the worst-case scenario with an array containing all unique elements, the decision tree
+Time Complexity: O(N x 2 ^ N). In the worst-case scenario with an array containing all unique elements, the decision tree
  forks 2 ^ N times. For each generated path, executing the new ArrayList<>(currentSubsetPath) copy operation takes O(N)
  linear time. Sorting takes O(N log N), which is completely absorbed by the dominant exponential runtime.
 
