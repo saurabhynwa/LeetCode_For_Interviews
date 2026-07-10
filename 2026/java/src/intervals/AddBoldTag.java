@@ -28,8 +28,8 @@ Since now the four <b>'s are consecutive, we merge them: "<b>aaabbb</b>".
  */
 
 /*
-Time Complexity: (O(N . M)) where (N) is the length of the string (s) and (M) is the total character length of all
-strings combined inside the words array. This is because indexOf completes a scan across the string payload.
+Time Complexity: (O(N x M x L)) where (N) is the length of the string (s) and (M) is number of words given and (L) is
+the maximum length of a word.
 
 Space Complexity: (O(N)) auxiliary space to host the boolean[] bold array footprint.
 */
@@ -49,49 +49,47 @@ public class AddBoldTag {
             return s;
         }
 
-        int n = s.length();
-        // Step 1: The Boolean Mask (Flagging what needs to be bolded)
-        boolean[] bold = new boolean[n];
+        // Logic: loop on each character of the input string and use the current index & current index + wordLen as the
+        // substring range match. Because substring end range index is exclusive, it's important to add word length to
+        // current index. This way we solve the end range exclusive issue. Wherever we find a match we flip the flag in
+        // the extra boolean flag array we are maintaining.
+        // bold start - current boolean cell is true and previous one is false, handle for zero index
+        // then append the character on current index
+        // bold end - current boolean cell is true and next cell is false, handle for last index
+        int strLength = s.length();
+        boolean[] isBold = new boolean[strLength];
 
-        for (String word : words) {
-            int wordLen = word.length();
-            // Find every occurrence of the word in string s
-            int index = s.indexOf(word);
-            while (index != -1) {
-                // Paint this specific section as true in our boolean mask
-                for (int i = index; i < index + wordLen; i++) {
-                    bold[i] = true;
+        for(int currentIndex = 0; currentIndex < strLength; currentIndex++){
+            for(String word: words){
+                int wordLen = word.length();
+                // guard rail check
+                if(currentIndex + wordLen <= strLength && s.substring(currentIndex, currentIndex + wordLen).equals(word)){
+                    // flip all the indexes in this range in the boolean array to true
+                    for(int j = currentIndex; j < currentIndex + wordLen; j++){
+                        isBold[j] = true;
+                    }
                 }
-                // Check if the same word appears later in the string
-                index = s.indexOf(word, index + 1);
             }
         }
 
-        // Step 2: Reconstruct the string with tags using our paintbrush analogy
-        StringBuilder result = new StringBuilder();
-        int runner = 0;
+        StringBuilder sb = new StringBuilder();
 
-        while (runner < n) {
-            if (bold[runner]) {
-                // We reached a bold segment! Open the bold tag
-                result.append("<b>");
+        for(int currentIndex = 0; currentIndex < strLength; currentIndex++){
+            // bold start - current boolean cell is true and previous index is false, handle zero index
+            if(isBold[currentIndex] && (currentIndex == 0 || !isBold[currentIndex - 1])){
+                sb.append("<b>");
+            }
 
-                // Keep moving forward as long as the roadblock requires bolding
-                while (runner < n && bold[runner]) {
-                    result.append(s.charAt(runner));
-                    runner++;
-                }
+            // append current char from string input
+            sb.append(s.charAt(currentIndex));
 
-                // The bold segment ended, close the tag
-                result.append("</b>");
-            } else {
-                // Standard non-bold text, just append and pass through
-                result.append(s.charAt(runner));
-                runner++;
+            // bold end - current boolean cell is true and next index is false, handle last index
+            if(isBold[currentIndex] && ((currentIndex == strLength - 1) || !isBold[currentIndex + 1])){
+                sb.append("</b>");
             }
         }
 
-        return result.toString();
+        return sb.toString();
     }
 
     public static void main(String[] args) {
