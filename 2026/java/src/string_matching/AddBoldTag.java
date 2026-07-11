@@ -1,7 +1,4 @@
-package src.intervals;
-
-import java.util.ArrayList;
-import java.util.List;
+package src.string_matching;
 
 /*
 You are given a string s and an array of strings words. You should add a closed pair of bold tag <b> and </b> to wrap
@@ -98,4 +95,3 @@ public class AddBoldTag {
         System.out.println(addBoldTag.addBoldTag("aaabbb", new String[]{"aa", "b"}));
     }
 }
-
